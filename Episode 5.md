@@ -23,27 +23,28 @@ Consider the example used in the last post where two functions return Maybes and
 
 The function signatures are as follows
 
-`getName :: ID → Maybe String
-getDOB :: String → Maybe DOB`
+`getName :: ID → Maybe String`
+
+`getDOB :: String → Maybe DOB`
 
 The non-idiomatic code is below
 
-`MaybeID
-bind (id → getName id
-	       bind (name → getDOB name)
-	)`
+    MaybeID
+      bind (id → getName id  
+	           bind (name → getDOB name)  
+	    )
 
 As you can see I’ve attached the subsequent bind after getName within the passed in function.  To use monads idiomatically the above code should really be
 
-`MaybeID
-bind (id → getName id)
-bind (name → getDOB name)`
+    MaybeID
+    bind (id → getName id)
+    bind (name → getDOB name)
 
 Originally I did not like Haskell’s do notation because I thought it obscured the Monad’s bind mechanism.  I have changed by opinion on that because I experienced this issue.  So for example the corresponding do notation syntax would be the following.
 
-`Id ← MaybeID
-name ← getName Id
-DOB ← getDOB name`
+    Id ← MaybeID
+    name ← getName Id
+    DOB ← getDOB name
 
 
 In Episode 3 I described how I was using the Either String Bool as a return type for the Plutus validation conditions instead of just Bool as a means to communicate why an error occurred.  
