@@ -8,8 +8,9 @@ In Episode 1 I described the big-picture attributes of Haskell, namely that bein
 
 I used an infinite list because I did not know the length of the list at compile time.  That code contributed to a major bug I encountered.
 
-`indexSequence :: (RandomGen g, Foldable t) => g -> Int -> t a -> [Int] 
-indexSequence g numberOfIndexes listOfItemsToGenerateRandomIndexesFrom = 
+`indexSequence :: (RandomGen g, Foldable t) => g -> Int -> t a -> [Int]`
+
+`indexSequence g numberOfIndexes listOfItemsToGenerateRandomIndexesFrom = 
 	(take numberOfIndexes . nub) $ randomRs (0, length listOfItemsToGenerateRandomIndexesFrom - 1) g`
 
 The code above is supposed to generate a list of random indexes in a list.  It’s parameters are a random generator, the number of indexes to return and the list of items to generate random indexes from.   
